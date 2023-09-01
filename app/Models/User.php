@@ -3,7 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -11,6 +13,8 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    public const PROFILE_IMG_PATH = 'storage/profile/';
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +24,11 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
+        'status',
+        'about',
+        'image',
+        'role_id',
         'password',
     ];
 
@@ -42,4 +51,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    /**
+     * @param array $input
+     * @return Builder|Model|null
+     */
+    final public function getUserByEmailOrPhone(array $input): Model|Builder|null
+    {
+        return self::query()->where('email', $input['email'])
+            ->orWhere('phone', $input['email'])->first();
+    }
+
 }

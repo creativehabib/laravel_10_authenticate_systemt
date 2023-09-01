@@ -1,6 +1,6 @@
-<nav class=" sticky left-0 top-0 z-50 w-full bg-white shadow border-b border-slate-950 dark:bg-gray-900">
-    <div class="px-3">
-        <div class="relative flex h-[58px] items-center justify-between">
+<nav class=" sticky left-0 top-0 z-50 w-screen bg-white shadow-md border-b border-gray-200 dark:border-slate-700 dark:bg-gray-900">
+    <div class="px-6">
+        <div class="relative flex h-[48px] items-center justify-between">
             <div class="flex flex-1 items-center sm:items-stretch sm:justify-start">
                 <div class="flex flex-shrink-0 items-center">
                     <div id="hamburger" class=" mr-4 flex text-neutral-400" data-te-sidenav-toggle-ref="" data-te-target="#sidenav-main" aria-expanded="false">
@@ -49,8 +49,15 @@
                             class="hidden py-2 text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:block lg:px-2 [&amp;.active]:text-black/90 dark:[&amp;.active]:text-zinc-400">
                             Dashboard
                         </a>
+
                         @endauth
+                        <a
+                            href="{{route('post')}}"
+                            class="hidden py-2 text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:block lg:px-2 [&amp;.active]:text-black/90 dark:[&amp;.active]:text-zinc-400">
+                            Post
+                        </a>
                         @guest
+
                         <a
                             href="{{route('login')}}"
                             class="hidden py-2 text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:block lg:px-2 [&amp;.active]:text-black/90 dark:[&amp;.active]:text-zinc-400">
@@ -94,10 +101,18 @@
                 </a>
                  @auth
                 <a href="{{route('logout')}}" class="rounded-md px-1.5 py-2 text-sm font-medium text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 sm:p-2">
-                    <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h11m0 0-4-4m4 4-4 4m-5 3H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h3"/>
                     </svg>
                 </a>
+                    <a href="{{route('profile')}}">
+                        <div class="flex space-x-2">
+                            <div class="relative w-8 h-8">
+                                <img class="rounded-full border border-gray-100 shadow-sm" src="/storage/profile/{{auth()->user()->image}}" alt="user image" />
+                                <div class="absolute top-0 right-0 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div>
+                            </div>
+                        </div>
+                    </a>
                 @endauth
             </div>
         </div>

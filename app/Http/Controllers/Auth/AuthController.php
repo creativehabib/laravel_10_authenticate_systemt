@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
 
+    public const ADMIN = 1;
+    public const USER = 2;
     public function index()
     {
         return view('auth.register');
@@ -22,10 +24,17 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        if (!auth()->attempt($request->only('email','password'),$request->remember)){
+        $user = (new User())->getUserByEmailOrPhone($request->all());
+//        if ($user && Hash::check($request->input('password'), $user->password)){
+//            return redirect()->intended('dashboard');
+//        }
+//        if (Auth::attempt(['email' => $user->email, 'password' => $user->password, 'status' => 1])) {
+//            return redirect()->intended('dashboard');
+//        }
+        if (!auth()->attempt(['email' => $request->email, 'password' => $request->password, 'status' => 1])){
             return back()->with('status','The provided credentials are incorrect.');
         }
-        return redirect()->intended('/');
+        return redirect()->intended('dashboard');
     }
 
     public function store(Request $request)
@@ -40,13 +49,12 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
-        auth()->attempt($request->only('email','password'));
-        return redirect()->route('dashboard');
+        return redirect()->route('login');
     }
 
     public function logout()
     {
         auth()->logout();
-        return redirect()->route('home');
+        return redirect()->route('login');
     }
 }
