@@ -8,6 +8,12 @@
 </p>
 ![alt text](http://url/to/img.png](https://github.com/creativehabib/laravel_10_authenticate_systemt/blob/master/Login.png)
 ![alt text](https://github.com/creativehabib/laravel_10_authenticate_systemt/blob/master/dashboard.png)
+
+
+![myimage-alt-tag](https://github.com/creativehabib/laravel_10_authenticate_systemt/blob/master/Login.png)
+
+
+![myimage-alt-tag](https://github.com/creativehabib/laravel_10_authenticate_systemt/blob/master/dashboard.png)
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
